@@ -3,6 +3,7 @@ import { SIZES } from './lib/constants'
 import { Size } from './lib/types'
 
 export class PDF extends BasePDF {
+  producer: string = 'podpdf-browser'
 
   /**
    * Download PDF in browser using Blob and URL APIs

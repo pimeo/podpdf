@@ -51,3 +51,4 @@ const doc = pdf('A4')
 
 await doc.save('example.pdf')
 console.log('PDF created: example.pdf (7.6KB library)')
+console.log('PDF Bounding elements', JSON.stringify(doc.getBoundingElements()))

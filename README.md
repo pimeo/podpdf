@@ -1,7 +1,7 @@
 # podpdf
 
 A forked package of the amazing [Herolab.ID podpdf](https://github.com/herolabid/podpdf) project.
-Includes various features not (yet) present in the original library and a more human and easier-to-maintain syntax.
+Includes some features not (yet) present in the original library and a more human and easier-to-maintain syntax.
 
 **Ultra-fast, zero-dependency PDF generation for Node.js, Bun & Browser**
 
@@ -11,15 +11,12 @@ Includes various features not (yet) present in the original library and a more h
 Zero dependencies  •  TypeScript native
 ```
 
-## Why podpdf?
+## What's differ from original podpdf library
+- [x] Fix the `ERR_PACKAGE_PATH_NOT_EXPORTED` error when compiling via Webpack.
+- [x] Support table multi-lines row cell. When a row has a fixed width, the text in the cells of the associated columns is automatically wrapped to the next line.
+- [x] The project is structured into several files to facilitate maintenance, make it easier to integrate new features and avoid code repetition.
+- [x] Get the boundaries (width/height/offsetX/offsetY) of each set of elements in the document.
 
-| Library | Size | Dependencies | Speed | Environment |
-|---------|------|--------------|-------|-------------|
-| **podpdf** | **~9 KB** | **0** | **5.5x** | Node.js/Bun |
-| **podpdf/plus** | **~13 KB** | **0** | **5x** | Node.js/Bun |
-| **podpdf/browser** | **~9 KB** | **0** | **5.5x** | **Browser** ✨ |
-| jsPDF | 290 KB | 2+ | 1x | Browser/Node |
-| pdfkit | 1 MB | 10+ | 0.8x | Node.js only |
 
 ## Feature Comparison
 
@@ -30,7 +27,7 @@ Zero dependencies  •  TypeScript native
 | Text & Styling | ✅ | ✅ | ✅ |
 | Text Wrap & Alignment | ✅ | ✅ | ✅ |
 | Shapes (rect, circle, line) | ✅ | ✅ | ✅ |
-| Tables | ✅ | ✅ | ✅ |
+| Tables (with support for multi-lines) | ✅ | ✅ | ✅ |
 | Images (JPEG) | ✅ | ✅ | ✅ |
 | Images (PNG) | ❌ | ✅ | ❌ |
 | Links/URLs | ✅ | ✅ | ✅ |
@@ -38,6 +35,7 @@ Zero dependencies  •  TypeScript native
 | Document Metadata | ✅ | ✅ | ✅ |
 | Custom Fonts (TTF) | ❌ | ✅ | ❌ |
 | TypeScript Native | ✅ | ✅ | ✅ |
+| Bounding elements | ✅ | ❌ (incoming) | ✅ |
 
 ### Environment Support
 
@@ -49,20 +47,20 @@ Zero dependencies  •  TypeScript native
 | Browser Download (.download) | ❌ | ❌ | ✅ |
 
 **Choose the right variant:**
-- `podpdf` - Node.js/Bun for invoices, reports, tables
-- `podpdf/plus` - Need PNG images or custom fonts
-- `podpdf/browser` - Browser-native PDF generation
+- `@pimeo/podpdf` - Node.js/Bun for invoices, reports, tables
+- `@pimeo/podpdf/plus` - Need PNG images or custom fonts
+- `@pimeo/podpdf/browser` - Browser-native PDF generation
 
 ## Installation
 
 ```bash
-npm install podpdf
+npm install @pimeo/podpdf
 # or
-yarn add podpdf
+yarn add @pimeo/podpdf
 # or
-pnpm add podpdf
+pnpm add @pimeo/podpdf
 # or
-bun add podpdf
+bun add @pimeo/podpdf
 ```
 
 ## Package Variants
@@ -71,16 +69,16 @@ podpdf provides **3 specialized exports** for different use cases:
 
 | Import | Use Case | Key Features |
 |--------|----------|--------------|
-| `podpdf` | Node.js/Bun | Core features, `.save()` to file |
-| `podpdf/plus` | Node.js/Bun | PNG images + custom TTF fonts |
-| `podpdf/browser` | Browser | Browser-native, `.download()` method |
+| `@pimeo/podpdf` | Node.js/Bun | Core features, `.save()` to file |
+| `@pimeo/podpdf/plus` | Node.js/Bun | PNG images + custom TTF fonts |
+| `@pimeo/podpdf/browser` | Browser | Browser-native, `.download()` method |
 
 ## Quick Start
 
 ### Node.js / Bun
 
 ```typescript
-import { pdf } from 'podpdf'
+import { pdf } from '@pimeo/podpdf'
 
 await pdf('A4')
   .text('Hello World!', 50, 50, { size: 24, weight: 'bold' })
@@ -91,7 +89,7 @@ await pdf('A4')
 ### Browser
 
 ```typescript
-import { pdf } from 'podpdf/browser'
+import { pdf } from '@pimeo/podpdf/browser'
 
 pdf('A4')
   .text('Hello Browser!', 50, 50, { size: 24, weight: 'bold' })
@@ -115,7 +113,7 @@ pdf('A4')
 For PNG images and custom fonts, use `podpdf/plus`:
 
 ```typescript
-import { pdfPlus } from 'podpdf/plus'
+import { pdfPlus } from '@pimeo/podpdf/plus'
 
 // Load custom font
 const fontData = await Bun.file('custom-font.ttf').bytes()
@@ -135,7 +133,7 @@ await pdfPlus('A4')
 ### Create Document
 
 ```typescript
-import { pdf, PDF, SIZES } from 'podpdf'
+import { pdf, PDF, SIZES } from '@pimeo/podpdf'
 
 // Using helper function
 const doc = pdf('A4')
@@ -260,6 +258,18 @@ pdf('A4')
   .save('invoice.pdf')
 ```
 
+### Bounding Elements
+
+```typescript
+.getBoundingElements()
+```
+
+```typescript
+pdf('A4')
+  .text('...', 50, 50, {id: 'my-text-1'})
+  .getBoundingElements()
+```
+
 ### Output
 
 ```typescript
@@ -275,7 +285,7 @@ const bytes = doc.build()
 ### Complete Invoice
 
 ```typescript
-import { pdf } from 'podpdf'
+import { pdf } from '@pimeo/podpdf'
 
 const invoice = {
   number: 'INV-2024-001',
@@ -394,7 +404,7 @@ await pdf('A4')
 ### Report with Chart
 
 ```typescript
-import { pdf } from 'podpdf'
+import { pdf } from '@pimeo/podpdf'
 
 const data = [120, 150, 180, 140, 200]
 const max = Math.max(...data)
@@ -414,7 +424,7 @@ await doc.save('report.pdf')
 ## Page Sizes
 
 ```typescript
-import { SIZES } from 'podpdf'
+import { SIZES } from '@pimeo/podpdf'
 
 SIZES.A3     // { width: 842, height: 1191 }
 SIZES.A4     // { width: 595, height: 842 }
@@ -441,7 +451,7 @@ import type {
   LinkOpts,
   TableCol,
   TableOpts
-} from 'podpdf'
+} from '@pimeo/podpdf'
 ```
 
 ## Benchmark
@@ -465,7 +475,7 @@ Tested with 1000 document generations:
 For browser environments, use the dedicated `podpdf/browser` module with built-in download support:
 
 ```typescript
-import { pdf } from 'podpdf/browser'
+import { pdf } from '@pimeo/podpdf/browser'
 
 // Create and download PDF directly in browser
 pdf('A4')
@@ -495,7 +505,7 @@ iframe.src = dataURL
 The main `podpdf` module can also work in browsers using the `build()` method:
 
 ```typescript
-import { pdf } from 'podpdf'
+import { pdf } from '@pimeo/podpdf'
 
 const bytes = doc.build()
 const blob = new Blob([bytes], { type: 'application/pdf' })

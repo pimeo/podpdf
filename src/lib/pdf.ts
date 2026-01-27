@@ -18,10 +18,20 @@ import {
 
 
 export class PDF {
-    private producer: string = 'podpdf-browser'
-    private pages: Page[] = []; private cur: Page | null = null; private sz: Size; private meta?: PDFMetadata
-    constructor(s: Size | keyof typeof SIZES = 'A4') { this.sz = typeof s === 'string' ? SIZES[s] : s }
-    metadata(m: PDFMetadata) { this.meta = m; return this }
+    producer: string = 'podpdf'
+    private pages: Page[] = [];
+    private cur: Page | null = null;
+    private sz: Size;
+    private meta?: PDFMetadata
+
+    constructor(s: Size | keyof typeof SIZES = 'A4') {
+        this.sz = typeof s === 'string' ? SIZES[s] : s
+    }
+
+    metadata(m: PDFMetadata) {
+        this.meta = m;
+        return this
+    }
 
     page(s?: Size | keyof typeof SIZES) {
         this.cur = new Page(s ? (typeof s === 'string' ? SIZES[s] : s) : this.sz);
@@ -35,7 +45,14 @@ export class PDF {
     image(d: Uint8Array, x: number, y: number, o?: ImageOpts) { this.ensure().image(d, x, y, o); return this }
     link(t: string, url: string, x: number, y: number, o?: LinkOpts) { this.ensure().link(t, url, x, y, o); return this }
     table(data: string[][], x: number, y: number, o: TableOpts) { this.ensure().table(data, x, y, o); return this }
-    private ensure() { if (!this.cur) this.page(); return this.cur! }
+    getBoundingElements() { return this.ensure().getBoundingElements(); }
+
+    private ensure() {
+        if (!this.cur) {
+            this.page();
+        }
+        return this.cur!
+    }
 
     build(): Uint8Array {
         const s = new Stream(), offsets: number[] = [0]

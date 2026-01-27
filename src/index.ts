@@ -3,6 +3,8 @@ import { SIZES } from './lib/constants'
 import { Size } from './lib/types'
 
 export class PDF extends BasePDF {
+  producer: string = 'podpdf'
+
   /**
    * Save PDF in filesystem using FS promise or Bun.
    * @param {string} path - The path of the file to store the built file.

@@ -67,7 +67,8 @@ const doc = pdf('A4')
       headerColor: '#fff',
       borderColor: '#1e8449',
       fontSize: 10,
-      padding: 8
+      padding: 8,
+      id: 'table-3'
     }
   )
 

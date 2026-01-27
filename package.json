@@ -64,7 +64,7 @@
     "url": "https://github.com/pimeo/podpdf/issues"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=20"
   },
   "devDependencies": {
     "@types/bun": "^1.3.5",
