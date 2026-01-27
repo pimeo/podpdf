@@ -1,10 +1,10 @@
 %PDF-1.4
 %µµµµ
 1 0 obj
-<</Type/Font/Subtype/Type1/BaseFont/Helvetica-Bold>>
+<</Type/Font/Subtype/Type1/BaseFont/Helvetica-Bold/Encoding/WinAnsiEncoding>>
 endobj
 2 0 obj
-<</Type/Font/Subtype/Type1/BaseFont/Helvetica>>
+<</Type/Font/Subtype/Type1/BaseFont/Helvetica/Encoding/WinAnsiEncoding>>
 endobj
 3 0 obj
 <</Length 6347>>
@@ -339,7 +339,7 @@ BT
 ET
 Q
 q
-50 406 350 26 re
+50 404 350 28 re
 0.204 0.286 0.369 rg
 f
 Q
@@ -376,7 +376,7 @@ BT
 ET
 Q
 q
-50 380 350 26 re
+50 376 350 28 re
 1.000 1.000 1.000 rg
 f
 Q
@@ -384,7 +384,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-58 390 Td
+58 388 Td
 (January) Tj
 ET
 Q
@@ -392,7 +392,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-179.80 390 Td
+179.80 388 Td
 (45) Tj
 ET
 Q
@@ -400,7 +400,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-275.60 390 Td
+275.60 388 Td
 ($12,500) Tj
 ET
 Q
@@ -408,12 +408,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-352.20 390 Td
+352.20 388 Td
 (+0%) Tj
 ET
 Q
 q
-50 354 350 26 re
+50 348 350 28 re
 0.976 0.976 0.976 rg
 f
 Q
@@ -421,7 +421,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-58 364 Td
+58 360 Td
 (February) Tj
 ET
 Q
@@ -429,7 +429,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-179.80 364 Td
+179.80 360 Td
 (58) Tj
 ET
 Q
@@ -437,7 +437,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-275.60 364 Td
+275.60 360 Td
 ($15,800) Tj
 ET
 Q
@@ -445,12 +445,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-344.40 364 Td
+344.40 360 Td
 (+26.4%) Tj
 ET
 Q
 q
-50 328 350 26 re
+50 320 350 28 re
 1.000 1.000 1.000 rg
 f
 Q
@@ -458,7 +458,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-58 338 Td
+58 332 Td
 (March) Tj
 ET
 Q
@@ -466,7 +466,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-179.80 338 Td
+179.80 332 Td
 (52) Tj
 ET
 Q
@@ -474,7 +474,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-275.60 338 Td
+275.60 332 Td
 ($14,200) Tj
 ET
 Q
@@ -482,12 +482,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-344.40 338 Td
+344.40 332 Td
 (-10.1%) Tj
 ET
 Q
 q
-50 302 350 26 re
+50 292 350 28 re
 0.976 0.976 0.976 rg
 f
 Q
@@ -495,7 +495,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-58 312 Td
+58 304 Td
 (April) Tj
 ET
 Q
@@ -503,7 +503,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-179.80 312 Td
+179.80 304 Td
 (71) Tj
 ET
 Q
@@ -511,7 +511,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-275.60 312 Td
+275.60 304 Td
 ($18,900) Tj
 ET
 Q
@@ -519,12 +519,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-344.40 312 Td
+344.40 304 Td
 (+33.1%) Tj
 ET
 Q
 q
-50 276 350 26 re
+50 264 350 28 re
 1.000 1.000 1.000 rg
 f
 Q
@@ -532,7 +532,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-58 286 Td
+58 276 Td
 (May) Tj
 ET
 Q
@@ -540,7 +540,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-179.80 286 Td
+179.80 276 Td
 (85) Tj
 ET
 Q
@@ -548,7 +548,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-275.60 286 Td
+275.60 276 Td
 ($22,100) Tj
 ET
 Q
@@ -556,12 +556,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-344.40 286 Td
+344.40 276 Td
 (+16.9%) Tj
 ET
 Q
 q
-50 250 350 26 re
+50 236 350 28 re
 0.976 0.976 0.976 rg
 f
 Q
@@ -569,7 +569,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-58 260 Td
+58 248 Td
 (June) Tj
 ET
 Q
@@ -577,7 +577,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-179.80 260 Td
+179.80 248 Td
 (98) Tj
 ET
 Q
@@ -585,7 +585,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-275.60 260 Td
+275.60 248 Td
 ($25,600) Tj
 ET
 Q
@@ -593,12 +593,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-344.40 260 Td
+344.40 248 Td
 (+15.8%) Tj
 ET
 Q
 q
-50 250 350 182 re
+50 236 350 196 re
 0.867 0.867 0.867 RG
 S
 Q
@@ -669,13 +669,13 @@ xref
 0 7
 0000000000 65535 f 
 0000000019 00000 n 
-0000000087 00000 n 
-0000000150 00000 n 
-0000006547 00000 n 
-0000006598 00000 n 
-0000006737 00000 n 
+0000000112 00000 n 
+0000000200 00000 n 
+0000006597 00000 n 
+0000006648 00000 n 
+0000006787 00000 n 
 trailer
 <</Size 7/Root 6 0 R>>
 startxref
-6782
+6832
 %%EOF

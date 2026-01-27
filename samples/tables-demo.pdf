@@ -1,13 +1,13 @@
 %PDF-1.4
 %µµµµ
 1 0 obj
-<</Type/Font/Subtype/Type1/BaseFont/Helvetica-Bold>>
+<</Type/Font/Subtype/Type1/BaseFont/Helvetica-Bold/Encoding/WinAnsiEncoding>>
 endobj
 2 0 obj
-<</Type/Font/Subtype/Type1/BaseFont/Helvetica>>
+<</Type/Font/Subtype/Type1/BaseFont/Helvetica/Encoding/WinAnsiEncoding>>
 endobj
 3 0 obj
-<</Length 9465>>
+<</Length 9555>>
 stream
 q
 0 792 595 50 re
@@ -31,7 +31,7 @@ BT
 ET
 Q
 q
-50 721 230 26 re
+50 719 230 28 re
 0.941 0.941 0.941 rg
 f
 Q
@@ -60,7 +60,7 @@ BT
 ET
 Q
 q
-50 695 230 26 re
+50 691 230 28 re
 1.000 1.000 1.000 rg
 f
 Q
@@ -68,7 +68,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-58 705 Td
+58 703 Td
 (Apple) Tj
 ET
 Q
@@ -76,7 +76,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-174.80 705 Td
+174.80 703 Td
 (10) Tj
 ET
 Q
@@ -84,12 +84,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-246 705 Td
+246 703 Td
 ($1.50) Tj
 ET
 Q
 q
-50 669 230 26 re
+50 663 230 28 re
 0.976 0.976 0.976 rg
 f
 Q
@@ -97,7 +97,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-58 679 Td
+58 675 Td
 (Banana) Tj
 ET
 Q
@@ -105,7 +105,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-174.80 679 Td
+174.80 675 Td
 (25) Tj
 ET
 Q
@@ -113,12 +113,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-246 679 Td
+246 675 Td
 ($0.75) Tj
 ET
 Q
 q
-50 643 230 26 re
+50 635 230 28 re
 1.000 1.000 1.000 rg
 f
 Q
@@ -126,7 +126,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-58 653 Td
+58 647 Td
 (Orange) Tj
 ET
 Q
@@ -134,7 +134,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-174.80 653 Td
+174.80 647 Td
 (15) Tj
 ET
 Q
@@ -142,12 +142,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-246 653 Td
+246 647 Td
 ($2.00) Tj
 ET
 Q
 q
-50 643 230 104 re
+50 635 230 112 re
 0.800 0.800 0.800 RG
 S
 Q
@@ -160,7 +160,7 @@ BT
 ET
 Q
 q
-300 721 200 26 re
+300 719 200 28 re
 0.173 0.243 0.314 rg
 f
 Q
@@ -181,7 +181,7 @@ BT
 ET
 Q
 q
-300 695 200 26 re
+300 691 200 28 re
 1.000 1.000 1.000 rg
 f
 Q
@@ -189,7 +189,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-308 705 Td
+308 703 Td
 (John Doe) Tj
 ET
 Q
@@ -197,12 +197,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-447 705 Td
+447 703 Td
 (Admin) Tj
 ET
 Q
 q
-300 669 200 26 re
+300 663 200 28 re
 0.976 0.976 0.976 rg
 f
 Q
@@ -210,7 +210,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-308 679 Td
+308 675 Td
 (Jane Smith) Tj
 ET
 Q
@@ -218,12 +218,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-444.40 679 Td
+444.40 675 Td
 (Editor) Tj
 ET
 Q
 q
-300 643 200 26 re
+300 635 200 28 re
 1.000 1.000 1.000 rg
 f
 Q
@@ -231,7 +231,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-308 653 Td
+308 647 Td
 (Bob Wilson) Tj
 ET
 Q
@@ -239,12 +239,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-444.40 653 Td
+444.40 647 Td
 (Viewer) Tj
 ET
 Q
 q
-300 643 200 104 re
+300 635 200 112 re
 0.800 0.800 0.800 RG
 S
 Q
@@ -257,7 +257,7 @@ BT
 ET
 Q
 q
-50 566 390 26 re
+50 564 390 28 re
 0.153 0.682 0.376 rg
 f
 Q
@@ -294,7 +294,7 @@ BT
 ET
 Q
 q
-50 540 390 26 re
+50 524 390 40 re
 1.000 1.000 1.000 rg
 f
 Q
@@ -302,15 +302,23 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-58 550 Td
-(Web Development) Tj
+58 548 Td
+(Web Development \(including) Tj
 ET
 Q
 q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-229.40 550 Td
+58 536 Td
+(a long description\)) Tj
+ET
+Q
+q
+BT
+0.000 0.000 0.000 rg
+/Helvetica 10 Tf
+229.40 548 Td
 (40 hrs) Tj
 ET
 Q
@@ -318,7 +326,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-305.60 550 Td
+305.60 548 Td
 ($100/hr) Tj
 ET
 Q
@@ -326,12 +334,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-400.80 550 Td
+400.80 548 Td
 ($4,000) Tj
 ET
 Q
 q
-50 514 390 26 re
+50 496 390 28 re
 0.976 0.976 0.976 rg
 f
 Q
@@ -339,7 +347,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-58 524 Td
+58 508 Td
 (UI/UX Design) Tj
 ET
 Q
@@ -347,7 +355,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-229.40 524 Td
+229.40 508 Td
 (20 hrs) Tj
 ET
 Q
@@ -355,7 +363,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-310.80 524 Td
+310.80 508 Td
 ($80/hr) Tj
 ET
 Q
@@ -363,12 +371,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-400.80 524 Td
+400.80 508 Td
 ($1,600) Tj
 ET
 Q
 q
-50 488 390 26 re
+50 468 390 28 re
 1.000 1.000 1.000 rg
 f
 Q
@@ -376,7 +384,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-58 498 Td
+58 480 Td
 (Consulting) Tj
 ET
 Q
@@ -384,7 +392,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-229.40 498 Td
+229.40 480 Td
 (10 hrs) Tj
 ET
 Q
@@ -392,7 +400,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-305.60 498 Td
+305.60 480 Td
 ($150/hr) Tj
 ET
 Q
@@ -400,12 +408,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-400.80 498 Td
+400.80 480 Td
 ($1,500) Tj
 ET
 Q
 q
-50 462 390 26 re
+50 440 390 28 re
 0.976 0.976 0.976 rg
 f
 Q
@@ -413,7 +421,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-58 472 Td
+58 452 Td
 (Maintenance) Tj
 ET
 Q
@@ -421,7 +429,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-232 472 Td
+232 452 Td
 (5 hrs) Tj
 ET
 Q
@@ -429,7 +437,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-310.80 472 Td
+310.80 452 Td
 ($60/hr) Tj
 ET
 Q
@@ -437,25 +445,25 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-411.20 472 Td
+411.20 452 Td
 ($300) Tj
 ET
 Q
 q
-50 462 390 130 re
+50 440 390 152 re
 0.118 0.518 0.286 RG
 S
 Q
 q
-304 422 m
-426 422 l
-430 422 430 426 y
-430 443 l
-430 447 426 447 y
-304 447 l
-300 447 300 443 y
-300 426 l
-300 422 304 422 y
+304 407 m
+426 407 l
+430 407 430 411 y
+430 428 l
+430 432 426 432 y
+304 432 l
+300 432 300 428 y
+300 411 l
+300 407 304 407 y
 h
 0.153 0.682 0.376 rg
 f
@@ -464,7 +472,7 @@ q
 BT
 1.000 1.000 1.000 rg
 /HelveticaBold 12 Tf
-324.44 430 Td
+324.44 415 Td
 (Total: $7,400) Tj
 ET
 Q
@@ -477,7 +485,7 @@ BT
 ET
 Q
 q
-50 346 320 26 re
+50 344 320 28 re
 0.906 0.298 0.235 rg
 f
 Q
@@ -514,7 +522,7 @@ BT
 ET
 Q
 q
-50 320 320 26 re
+50 316 320 28 re
 1.000 1.000 1.000 rg
 f
 Q
@@ -522,7 +530,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-58 330 Td
+58 328 Td
 (podpdf) Tj
 ET
 Q
@@ -530,7 +538,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-169.60 330 Td
+169.60 328 Td
 (8 KB) Tj
 ET
 Q
@@ -538,7 +546,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-252.20 330 Td
+252.20 328 Td
 (Yes) Tj
 ET
 Q
@@ -546,12 +554,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-324.60 330 Td
+324.60 328 Td
 (5.5x) Tj
 ET
 Q
 q
-50 294 320 26 re
+50 288 320 28 re
 0.976 0.976 0.976 rg
 f
 Q
@@ -559,7 +567,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-58 304 Td
+58 300 Td
 (jsPDF) Tj
 ET
 Q
@@ -567,7 +575,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-164.40 304 Td
+164.40 300 Td
 (290 KB) Tj
 ET
 Q
@@ -575,7 +583,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-254.80 304 Td
+254.80 300 Td
 (No) Tj
 ET
 Q
@@ -583,12 +591,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-329.80 304 Td
+329.80 300 Td
 (1x) Tj
 ET
 Q
 q
-50 268 320 26 re
+50 260 320 28 re
 1.000 1.000 1.000 rg
 f
 Q
@@ -596,7 +604,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-58 278 Td
+58 272 Td
 (pdfkit) Tj
 ET
 Q
@@ -604,7 +612,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-169.60 278 Td
+169.60 272 Td
 (1 MB) Tj
 ET
 Q
@@ -612,7 +620,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-252.20 278 Td
+252.20 272 Td
 (Yes) Tj
 ET
 Q
@@ -620,12 +628,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-324.60 278 Td
+324.60 272 Td
 (0.8x) Tj
 ET
 Q
 q
-50 242 320 26 re
+50 232 320 28 re
 0.976 0.976 0.976 rg
 f
 Q
@@ -633,7 +641,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-58 252 Td
+58 244 Td
 (tinypdf) Tj
 ET
 Q
@@ -641,7 +649,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-164.40 252 Td
+164.40 244 Td
 (3.3 KB) Tj
 ET
 Q
@@ -649,7 +657,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-252.20 252 Td
+252.20 244 Td
 (Yes) Tj
 ET
 Q
@@ -657,12 +665,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-329.80 252 Td
+329.80 244 Td
 (4x) Tj
 ET
 Q
 q
-50 242 320 130 re
+50 232 320 140 re
 0.753 0.224 0.169 RG
 S
 Q
@@ -675,7 +683,7 @@ BT
 ET
 Q
 q
-50 160 270 22 re
+50 158 270 24 re
 0.204 0.596 0.859 rg
 f
 Q
@@ -704,7 +712,7 @@ BT
 ET
 Q
 q
-50 138 270 22 re
+50 134 270 24 re
 1.000 1.000 1.000 rg
 f
 Q
@@ -712,7 +720,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-67 146 Td
+67 144 Td
 (09:00) Tj
 ET
 Q
@@ -720,7 +728,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-116 146 Td
+116 144 Td
 (Standup Meeting) Tj
 ET
 Q
@@ -728,12 +736,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-246 146 Td
+246 144 Td
 (Room A) Tj
 ET
 Q
 q
-50 116 270 22 re
+50 110 270 24 re
 0.976 0.976 0.976 rg
 f
 Q
@@ -741,7 +749,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-67 124 Td
+67 120 Td
 (10:00) Tj
 ET
 Q
@@ -749,7 +757,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-116 124 Td
+116 120 Td
 (Code Review) Tj
 ET
 Q
@@ -757,12 +765,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-246 124 Td
+246 120 Td
 (Online) Tj
 ET
 Q
 q
-50 94 270 22 re
+50 86 270 24 re
 1.000 1.000 1.000 rg
 f
 Q
@@ -770,7 +778,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-67 102 Td
+67 96 Td
 (12:00) Tj
 ET
 Q
@@ -778,7 +786,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-116 102 Td
+116 96 Td
 (Lunch Break) Tj
 ET
 Q
@@ -786,12 +794,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-246 102 Td
+246 96 Td
 (-) Tj
 ET
 Q
 q
-50 72 270 22 re
+50 62 270 24 re
 0.976 0.976 0.976 rg
 f
 Q
@@ -799,7 +807,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-67 80 Td
+67 72 Td
 (14:00) Tj
 ET
 Q
@@ -807,7 +815,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-116 80 Td
+116 72 Td
 (Sprint Planning) Tj
 ET
 Q
@@ -815,12 +823,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-246 80 Td
+246 72 Td
 (Room B) Tj
 ET
 Q
 q
-50 50 270 22 re
+50 38 270 24 re
 1.000 1.000 1.000 rg
 f
 Q
@@ -828,7 +836,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-67 58 Td
+67 48 Td
 (16:00) Tj
 ET
 Q
@@ -836,7 +844,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-116 58 Td
+116 48 Td
 (Development) Tj
 ET
 Q
@@ -844,12 +852,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-246 58 Td
+246 48 Td
 (Desk) Tj
 ET
 Q
 q
-50 50 270 132 re
+50 38 270 144 re
 0.800 0.800 0.800 RG
 S
 Q
@@ -862,7 +870,7 @@ BT
 ET
 Q
 q
-320 160 200 22 re
+320 158 200 24 re
 0.953 0.612 0.071 rg
 f
 Q
@@ -891,7 +899,7 @@ BT
 ET
 Q
 q
-320 138 200 22 re
+320 134 200 24 re
 1.000 1.000 1.000 rg
 f
 Q
@@ -899,7 +907,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-326 146 Td
+326 144 Td
 (Auth) Tj
 ET
 Q
@@ -907,7 +915,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-424.60 146 Td
+424.60 144 Td
 (Done) Tj
 ET
 Q
@@ -915,12 +923,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-484.60 146 Td
+484.60 144 Td
 (100%) Tj
 ET
 Q
 q
-320 116 200 22 re
+320 110 200 24 re
 0.976 0.976 0.976 rg
 f
 Q
@@ -928,7 +936,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-326 124 Td
+326 120 Td
 (Dashboard) Tj
 ET
 Q
@@ -936,7 +944,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-414.20 124 Td
+414.20 120 Td
 (Progress) Tj
 ET
 Q
@@ -944,12 +952,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-487.20 124 Td
+487.20 120 Td
 (75%) Tj
 ET
 Q
 q
-320 94 200 22 re
+320 86 200 24 re
 1.000 1.000 1.000 rg
 f
 Q
@@ -957,7 +965,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-326 102 Td
+326 96 Td
 (API) Tj
 ET
 Q
@@ -965,7 +973,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-414.20 102 Td
+414.20 96 Td
 (Progress) Tj
 ET
 Q
@@ -973,12 +981,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-487.20 102 Td
+487.20 96 Td
 (60%) Tj
 ET
 Q
 q
-320 72 200 22 re
+320 62 200 24 re
 0.976 0.976 0.976 rg
 f
 Q
@@ -986,7 +994,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-326 80 Td
+326 72 Td
 (Testing) Tj
 ET
 Q
@@ -994,7 +1002,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-416.80 80 Td
+416.80 72 Td
 (Pending) Tj
 ET
 Q
@@ -1002,12 +1010,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-489.80 80 Td
+489.80 72 Td
 (0%) Tj
 ET
 Q
 q
-320 50 200 22 re
+320 38 200 24 re
 1.000 1.000 1.000 rg
 f
 Q
@@ -1015,7 +1023,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-326 58 Td
+326 48 Td
 (Deploy) Tj
 ET
 Q
@@ -1023,7 +1031,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-416.80 58 Td
+416.80 48 Td
 (Pending) Tj
 ET
 Q
@@ -1031,12 +1039,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-489.80 58 Td
+489.80 48 Td
 (0%) Tj
 ET
 Q
 q
-320 50 200 132 re
+320 38 200 144 re
 0.800 0.800 0.800 RG
 S
 Q
@@ -1055,13 +1063,13 @@ xref
 0 7
 0000000000 65535 f 
 0000000019 00000 n 
-0000000087 00000 n 
-0000000150 00000 n 
-0000009665 00000 n 
-0000009716 00000 n 
-0000009855 00000 n 
+0000000112 00000 n 
+0000000200 00000 n 
+0000009805 00000 n 
+0000009856 00000 n 
+0000009995 00000 n 
 trailer
 <</Size 7/Root 6 0 R>>
 startxref
-9900
+10040
 %%EOF

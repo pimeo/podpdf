@@ -50,7 +50,7 @@ const doc = pdf('A4')
   .text('3. Invoice Style Table', 50, 230, { size: 14, weight: 'bold' })
   .table(
     [
-      ['Web Development', '40 hrs', '$100/hr', '$4,000'],
+      ['Web Development (including a long description)', '40 hrs', '$100/hr', '$4,000'],
       ['UI/UX Design', '20 hrs', '$80/hr', '$1,600'],
       ['Consulting', '10 hrs', '$150/hr', '$1,500'],
       ['Maintenance', '5 hrs', '$60/hr', '$300'],
@@ -58,7 +58,7 @@ const doc = pdf('A4')
     50, 250,
     {
       columns: [
-        { header: 'Description', width: 160 },
+        { header: 'Description', width: 160, },
         { header: 'Hours', width: 70, align: 'center' },
         { header: 'Rate', width: 70, align: 'right' },
         { header: 'Amount', width: 90, align: 'right' },
@@ -72,8 +72,8 @@ const doc = pdf('A4')
   )
 
   // Total box
-  .rect(300, 395, 130, 25, { fill: '#27ae60', radius: 4 })
-  .text('Total: $7,400', 365, 412, { size: 12, color: '#fff', weight: 'bold', align: 'center' })
+  .rect(300, 410, 130, 25, { fill: '#27ae60', radius: 4 })
+  .text('Total: $7,400', 365, 427, { size: 12, color: '#fff', weight: 'bold', align: 'center' })
 
   // 4. Comparison Table (5 rows x 26 = 130)
   .text('4. Library Comparison', 50, 450, { size: 14, weight: 'bold' })

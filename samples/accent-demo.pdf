@@ -175,7 +175,7 @@ BT
 ET
 Q
 q
-50 366 280 26 re
+50 364 280 28 re
 0.173 0.243 0.314 rg
 f
 Q
@@ -204,7 +204,7 @@ BT
 ET
 Q
 q
-50 340 280 26 re
+50 336 280 28 re
 1.000 1.000 1.000 rg
 f
 Q
@@ -212,7 +212,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-58 350 Td
+58 348 Td
 (podpdf) Tj
 ET
 Q
@@ -220,7 +220,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-197 350 Td
+197 348 Td
 (7.6KB) Tj
 ET
 Q
@@ -228,12 +228,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-282.20 350 Td
+282.20 348 Td
 (Yes) Tj
 ET
 Q
 q
-50 314 280 26 re
+50 308 280 28 re
 0.976 0.976 0.976 rg
 f
 Q
@@ -241,7 +241,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-58 324 Td
+58 320 Td
 (tinypdf) Tj
 ET
 Q
@@ -249,7 +249,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-197 324 Td
+197 320 Td
 (3.3KB) Tj
 ET
 Q
@@ -257,12 +257,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-282.20 324 Td
+282.20 320 Td
 (Yes) Tj
 ET
 Q
 q
-50 288 280 26 re
+50 280 280 28 re
 1.000 1.000 1.000 rg
 f
 Q
@@ -270,7 +270,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-58 298 Td
+58 292 Td
 (jspdf) Tj
 ET
 Q
@@ -278,7 +278,7 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-197 298 Td
+197 292 Td
 (250KB) Tj
 ET
 Q
@@ -286,12 +286,12 @@ q
 BT
 0.000 0.000 0.000 rg
 /Helvetica 10 Tf
-284.80 298 Td
+284.80 292 Td
 (No) Tj
 ET
 Q
 q
-50 288 280 104 re
+50 280 280 112 re
 0.741 0.765 0.780 RG
 S
 Q

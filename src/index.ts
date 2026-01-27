@@ -14,7 +14,7 @@ export interface PDFMetadata { title?: string; author?: string; subject?: string
 
 export const SIZES: Record<string, Size> = { A4: { width: 595, height: 842 }, A3: { width: 842, height: 1191 }, A5: { width: 420, height: 595 }, LETTER: { width: 612, height: 792 } }
 const FONTS: Record<Weight, string> = { normal: 'Helvetica', bold: 'Helvetica-Bold', italic: 'Helvetica-Oblique', bolditalic: 'Helvetica-BoldOblique' }
-const CP1252: Record<string, number> = {'€': 128, '‚': 130, 'ƒ': 131, '„': 132, '…': 133, '†': 134, '‡': 135, 'ˆ': 136, '‰': 137, 'Š': 138, '‹': 139, 'Œ': 140, 'Ž': 142,'‘': 145, '’': 146, '“': 147, '”': 148, '•': 149, '–': 150, '—': 151, '˜': 152, '™': 153, 'š': 154, '›': 155, 'œ': 156, 'ž': 158, 'Ÿ': 159}
+const CP1252: Record<string, number> = { '€': 128, '‚': 130, 'ƒ': 131, '„': 132, '…': 133, '†': 134, '‡': 135, 'ˆ': 136, '‰': 137, 'Š': 138, '‹': 139, 'Œ': 140, 'Ž': 142, '‘': 145, '’': 146, '“': 147, '”': 148, '•': 149, '–': 150, '—': 151, '˜': 152, '™': 153, 'š': 154, '›': 155, 'œ': 156, 'ž': 158, 'Ÿ': 159 }
 
 const rgb = (c: Color): [number, number, number] => {
   if (Array.isArray(c)) return c
@@ -97,14 +97,24 @@ class Page {
   }
 
   table(data: string[][], x: number, y: number, o: TableOpts) {
-    const p = o.padding ?? 8, fs = o.fontSize ?? 10, rh = fs + p * 2
+    const p = o.padding ?? 8, fs = o.fontSize ?? 10
     const cw = o.columns.map((c, i) => c.width ?? Math.max(measure(c.header, fs), ...data.map(r => measure(r[i] ?? '', fs))) + p * 2)
     const tw = cw.reduce((a, b) => a + b, 0); let cy = y
-    this.rect(x, cy, tw, rh, { fill: o.headerBg ?? '#F0F0F0' })
-    let cx = x; for (let i = 0; i < o.columns.length; i++) { const c = o.columns[i]; this.text(c.header, cx + (c.align === 'center' ? cw[i] / 2 : c.align === 'right' ? cw[i] - p : p), cy + p + fs * 0.8, { size: fs, weight: 'bold', color: o.headerColor ?? '#000', align: c.align }); cx += cw[i] }
-    cy += rh
-    for (let r = 0; r < data.length; r++) { this.rect(x, cy, tw, rh, { fill: r % 2 ? '#F9F9F9' : '#FFF' }); cx = x; for (let i = 0; i < o.columns.length; i++) { const c = o.columns[i]; this.text(data[r][i] ?? '', cx + (c.align === 'center' ? cw[i] / 2 : c.align === 'right' ? cw[i] - p : p), cy + p + fs * 0.8, { size: fs, align: c.align }); cx += cw[i] }; cy += rh }
-    this.rect(x, y, tw, rh * (data.length + 1), { stroke: o.borderColor ?? '#CCC' }); return this
+    const headLines = o.columns.map((c, i) => this.wrap(c.header, cw[i] - p * 2, fs).length)
+    const hh = (Math.max(1, ...headLines) * fs * 1.2) + p * 2
+    this.rect(x, cy, tw, hh, { fill: o.headerBg ?? '#F0F0F0' })
+    let cx = x;
+    for (let i = 0; i < o.columns.length; i++) { const c = o.columns[i]; this.text(c.header, cx + (c.align === 'center' ? cw[i] / 2 : c.align === 'right' ? cw[i] - p : p), cy + p + fs * 0.8, { size: fs, weight: 'bold', color: o.headerColor ?? '#000', align: c.align, maxWidth: cw[i] - p * 2 }); cx += cw[i] }
+    cy += hh
+    for (let r = 0; r < data.length; r++) {
+      const rowLines = data[r].map((t, i) => this.wrap(t ?? '', cw[i] - p * 2, fs).length)
+      const rh = (Math.max(1, ...rowLines) * fs * 1.2) + p * 2
+      this.rect(x, cy, tw, rh, { fill: r % 2 ? '#F9F9F9' : '#FFF' });
+      cx = x;
+      for (let i = 0; i < o.columns.length; i++) { const c = o.columns[i]; this.text(data[r][i] ?? '', cx + (c.align === 'center' ? cw[i] / 2 : c.align === 'right' ? cw[i] - p : p), cy + p + fs * 0.8, { size: fs, align: c.align, maxWidth: cw[i] - p * 2 }); cx += cw[i] }
+      cy += rh
+    }
+    this.rect(x, y, tw, cy - y, { stroke: o.borderColor ?? '#CCC' }); return this
   }
 
   private wrap(t: string, mw: number, s: number): string[] {
@@ -175,9 +185,9 @@ export class PDF {
     let infoId = 0
     if (this.meta) {
       infoId = ++oid; offsets[infoId] = s.size()
-      const d = new Date(), date = `D:${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}${String(d.getHours()).padStart(2,'0')}${String(d.getMinutes()).padStart(2,'0')}${String(d.getSeconds()).padStart(2,'0')}`
+      const d = new Date(), date = `D:${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}${String(d.getHours()).padStart(2, '0')}${String(d.getMinutes()).padStart(2, '0')}${String(d.getSeconds()).padStart(2, '0')}`
       const m = this.meta
-      s.l(`${infoId} 0 obj`).l(`<<${m.title?`/Title(${esc(m.title)})`:''}${m.author?`/Author(${esc(m.author)})`:''}${m.subject?`/Subject(${esc(m.subject)})`:''}${m.keywords?`/Keywords(${esc(m.keywords)})`:''}${m.creator?`/Creator(${esc(m.creator)})`:''}/Producer(podpdf)/CreationDate(${date})>>`).l('endobj')
+      s.l(`${infoId} 0 obj`).l(`<<${m.title ? `/Title(${esc(m.title)})` : ''}${m.author ? `/Author(${esc(m.author)})` : ''}${m.subject ? `/Subject(${esc(m.subject)})` : ''}${m.keywords ? `/Keywords(${esc(m.keywords)})` : ''}${m.creator ? `/Creator(${esc(m.creator)})` : ''}/Producer(podpdf)/CreationDate(${date})>>`).l('endobj')
     }
 
     const catId = ++oid; offsets[catId] = s.size()
@@ -186,7 +196,7 @@ export class PDF {
     const xref = s.size()
     s.l('xref').l(`0 ${oid + 1}`).l('0000000000 65535 f ')
     for (let i = 1; i <= oid; i++) s.l(`${offsets[i].toString().padStart(10, '0')} 00000 n `)
-    s.l('trailer').l(`<</Size ${oid + 1}/Root ${catId} 0 R${infoId?`/Info ${infoId} 0 R`:''}>>`).l('startxref').l(xref.toString()).l('%%EOF')
+    s.l('trailer').l(`<</Size ${oid + 1}/Root ${catId} 0 R${infoId ? `/Info ${infoId} 0 R` : ''}>>`).l('startxref').l(xref.toString()).l('%%EOF')
     return s.out()
   }
 
