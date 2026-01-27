@@ -121,7 +121,8 @@ const doc = pdf('A4')
       headerBg: '#3498db',
       headerColor: '#fff',
       fontSize: 10,
-      padding: 6
+      padding: 6,
+      striped: false,
     }
   )
 
@@ -145,7 +146,8 @@ const doc = pdf('A4')
       headerBg: '#f39c12',
       headerColor: '#fff',
       fontSize: 10,
-      padding: 6
+      padding: 6,
+      stripedColor: '#efc785',
     }
   )
 

@@ -198,6 +198,8 @@ export class Page {
     table(data: string[][], x: number, y: number, o: TableOpts) {
         const p = o.padding ?? 8;
         const fs = o.fontSize ?? 10
+        const striped = o.striped !== false
+        const stripedColor = o.stripedColor ?? '#F9F9F9'
 
         // Calculate Widths
         const cw = o.columns.map((c, i) => c.width ?? Math.max(measure(c.header, fs), ...data.map(r => measure(r[i] ?? '', fs))) + p * 2)
@@ -239,7 +241,7 @@ export class Page {
             const rh = (Math.max(1, ...rowLines) * fs * 1.2) + p * 2
 
             // Draw Background
-            this.rect(x, cy, tw, rh, { fill: (o.striped && r % 2) ? (o.stripedColor ?? '#F9F9F9') : '#FFF', notInBounding: true })
+            this.rect(x, cy, tw, rh, { fill: (striped && r % 2) ? stripedColor : '#FFF', notInBounding: true })
 
             // Draw Text
             cx = x
