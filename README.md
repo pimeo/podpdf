@@ -1,14 +1,14 @@
 # podpdf
 
+A forked package of the amazing [Herolab.ID podpdf](https://github.com/herolabid/podpdf) project.
+Includes various features not (yet) present in the original library and a more human and easier-to-maintain syntax.
+
 **Ultra-fast, zero-dependency PDF generation for Node.js, Bun & Browser**
 
-[![npm version](https://img.shields.io/npm/v/podpdf.svg)](https://www.npmjs.com/package/podpdf)
-[![bundle size](https://img.shields.io/badge/size-8KB-brightgreen)](https://bundlephobia.com/package/podpdf)
-[![zero dependencies](https://img.shields.io/badge/dependencies-0-blue)](https://www.npmjs.com/package/podpdf)
-[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-Support-yellow?logo=buy-me-a-coffee)](https://buymeacoffee.com/herostack)
+[![npm version](https://img.shields.io/npm/v/@pimeo/podpdf.svg)](https://www.npmjs.com/package/@pimeo/podpdf)
 
 ```
-~9 KB minified  •  Zero dependencies  •  5x faster than jsPDF  •  TypeScript native
+Zero dependencies  •  TypeScript native
 ```
 
 ## Why podpdf?
