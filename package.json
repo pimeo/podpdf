@@ -57,11 +57,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/herolabid/podpdf"
+    "url": "https://github.com/pimeo/podpdf"
   },
-  "homepage": "https://github.com/herolabid/podpdf/blob/main/README.md",
+  "homepage": "https://github.com/pimeo/podpdf/blob/main/README.md",
   "bugs": {
-    "url": "https://github.com/herolabid/podpdf/issues"
+    "url": "https://github.com/pimeo/podpdf/issues"
   },
   "engines": {
     "node": ">=22"
