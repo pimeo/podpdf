@@ -10,7 +10,7 @@ export interface CircleOpts { fill?: Color; stroke?: Color; lineWidth?: number, 
 export interface ImageOpts { width?: number; height?: number, id?: string, notInBounding?: boolean }
 export interface LinkOpts { underline?: boolean; color?: Color, id?: string, size?: number, notInBounding?: boolean }
 export interface TableCol { header: string; width?: number; align?: Align }
-export interface TableOpts { columns: TableCol[]; headerBg?: Color; headerColor?: Color; borderColor?: Color; fontSize?: number; padding?: number, id?: string, notInBounding?: boolean }
+export interface TableOpts { columns: TableCol[]; headerBg?: Color; headerColor?: Color; headerRadius?: number, borderColor?: Color; fontSize?: number; padding?: number, id?: string, notInBounding?: boolean; striped?: boolean; stripedColor?: Color }
 export interface PDFMetadata { title?: string; author?: string; subject?: string; keywords?: string; creator?: string }
 export interface PNGData { w: number; h: number; rgb: Uint8Array; alpha?: Uint8Array }
 export interface TTFInfo { name: string; unitsPerEm: number; ascent: number; descent: number; bbox: number[]; widths: number[]; data: Uint8Array }

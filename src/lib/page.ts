@@ -210,7 +210,7 @@ export class Page {
         const headLines = o.columns.map((c, i) => this.wrap(c.header, cw[i] - p * 2, fs).length)
         const hh = (Math.max(1, ...headLines) * fs * 1.2) + p * 2
 
-        this.rect(x, cy, tw, hh, { fill: o.headerBg ?? '#F0F0F0', notInBounding: true })
+        this.rect(x, cy, tw, hh, { fill: o.headerBg ?? '#F0F0F0', radius: o.headerRadius ?? 0, notInBounding: true })
 
         let cx = x
         for (let i = 0; i < o.columns.length; i++) {
@@ -239,7 +239,7 @@ export class Page {
             const rh = (Math.max(1, ...rowLines) * fs * 1.2) + p * 2
 
             // Draw Background
-            this.rect(x, cy, tw, rh, { fill: r % 2 ? '#F9F9F9' : '#FFF', notInBounding: true })
+            this.rect(x, cy, tw, rh, { fill: (o.striped && r % 2) ? (o.stripedColor ?? '#F9F9F9') : '#FFF', notInBounding: true })
 
             // Draw Text
             cx = x
