@@ -25,9 +25,11 @@ import {
   parsePNGHeader,
   unfilterPNG,
   parseTTF,
+  getImageType,
 } from './lib/helpers'
 import { SIZES } from './lib/constants'
 import { Stream } from './lib/stream'
+import { inflateSync } from 'node:zlib'
 
 const FONTS: Record<string, Record<Weight, string>> = {
   helvetica: { normal: 'Helvetica', bold: 'Helvetica-Bold', italic: 'Helvetica-Oblique', bolditalic: 'Helvetica-BoldOblique' },
@@ -160,25 +162,33 @@ export class PDFPlus {
   rect(x: number, y: number, w: number, h: number, o?: RectOpts) { this.ensure().rect(x, y, w, h, o); return this }
   line(x1: number, y1: number, x2: number, y2: number, o?: LineOpts) { this.ensure().line(x1, y1, x2, y2, o); return this }
   circle(cx: number, cy: number, r: number, o?: CircleOpts) { this.ensure().circle(cx, cy, r, o); return this }
-  image(d: Uint8Array, x: number, y: number, o?: ImageOpts) { this.ensure().image(d, x, y, o); return this }
+  imageJpeg(d: Uint8Array, x: number, y: number, o?: ImageOpts) { this.ensure().image(d, x, y, o); return this }
   link(t: string, url: string, x: number, y: number, o?: LinkOpts) { this.ensure().link(t, url, x, y, o); return this }
   table(data: string[][], x: number, y: number, o: TableOpts) { this.ensure().table(data, x, y, o); return this }
 
+  image(d: Uint8Array, x: number, y: number, o: ImageOpts = {}): this {
+    const imageType = getImageType(d)
+
+    if ("jpeg" === imageType) {
+      return this.imageJpeg(d, x, y, o)
+    }
+
+    if ("png" === imageType) {
+      return this.imagePng(d, x, y, o)
+    }
+
+    return this
+  }
+
   // PNG image support (async because of zlib decompression)
-  async imagePng(d: Uint8Array, x: number, y: number, o?: ImageOpts): Promise<this> {
+  imagePng(d: Uint8Array, x: number, y: number, o?: ImageOpts): this {
     const header = parsePNGHeader(d)
     if (!header) return this
 
     // Decompress using built-in zlib
-    let raw: Uint8Array
-    if (typeof Bun !== 'undefined') {
-      raw = Bun.inflateSync(new Uint8Array(header.idat))
-    } else {
-      const { inflateSync } = await import('zlib')
-      raw = new Uint8Array(inflateSync(header.idat))
-    }
+    let raw: Uint8Array = new Uint8Array(inflateSync(header.idat))
 
-    const png = unfilterPNG(raw, header.w, header.h, header.colorType)
+    const png = unfilterPNG(raw, header.w, header.h, header.type, header.plte, header.trns)
     this.ensure().image(d, x, y, o, png)
     return this
   }
@@ -266,7 +276,8 @@ export class PDFPlus {
       const iRef = p.imgs.map((img, j) => `/${img.id} ${imgIds[i][j]} 0 R`).join('')
       const aRef = annotIds[i].length ? `/Annots[${annotIds[i].map(id => `${id} 0 R`).join(' ')}]` : ''
       offsets[pid] = s.size()
-      s.l(`${pid} 0 obj`).l(`<</Type/Page/Parent ${pagesId} 0 R/MediaBox[0 0 ${p.w} ${p.h}]/Contents ${contentIds[i]} 0 R/Resources<<${(fRef || cfRef) ? `/Font<<${fRef}${cfRef}>>` : ''}${iRef ? `/XObject<<${iRef}>>` : ''}>>${aRef}>>`).l('endobj')
+      // Added /Group dictionary to enable correct transparency blending
+      s.l(`${pid} 0 obj`).l(`<</Type/Page/Parent ${pagesId} 0 R/MediaBox[0 0 ${p.w} ${p.h}]/Group<</Type/Group/S/Transparency/CS/DeviceRGB>>/Contents ${contentIds[i]} 0 R/Resources<<${(fRef || cfRef) ? `/Font<<${fRef}${cfRef}>>` : ''}${iRef ? `/XObject<<${iRef}>>` : ''}>>${aRef}>>`).l('endobj')
     }
 
     // Info dictionary

@@ -1,4 +1,4 @@
-import { Color, PNGData, TTFInfo } from './types'
+import { Color, PNGData, PNGHeader, TTFInfo, ImageType } from './types'
 import { CP1252 } from './constants'
 
 export const rgb = (c: Color): [number, number, number] => {
@@ -22,41 +22,69 @@ export const measure = (t: string, s: number, fontName: string | null = null, fo
     }
     return w
 }
+// Returns 'png', 'jpeg', or null if unknown
+export const getImageType = (data: Uint8Array): ImageType => {
+    // Check for PNG signature (89 50 4E 47 0D 0A 1A 0A)
+    if (data[0] === 0x89 && data[1] === 0x50 && data[2] === 0x4E && data[3] === 0x47) {
+        return 'png';
+    }
 
-export const parsePNGHeader = (d: Uint8Array): { w: number; h: number; colorType: number; idat: Uint8Array } | null => {
+    // Check for JPEG signature (FF D8 FF)
+    if (data[0] === 0xFF && data[1] === 0xD8 && data[2] === 0xFF) {
+        return 'jpeg';
+    }
+
+    return null;
+}
+
+export const parsePNGHeader = (d: Uint8Array): PNGHeader | null => {
     if (d[0] !== 0x89 || d[1] !== 0x50 || d[2] !== 0x4E || d[3] !== 0x47) return null
-    let pos = 8, w = 0, h = 0, colorType = 0
+    let pos = 8, w = 0, h = 0, type = 0
     const idat: Uint8Array[] = []
+    let plte: Uint8Array | undefined, trns: Uint8Array | undefined
+
     while (pos < d.length) {
         const len = (d[pos] << 24) | (d[pos + 1] << 16) | (d[pos + 2] << 8) | d[pos + 3]
-        const type = String.fromCharCode(d[pos + 4], d[pos + 5], d[pos + 6], d[pos + 7])
-        if (type === 'IHDR') {
+        const chunk = String.fromCharCode(d[pos + 4], d[pos + 5], d[pos + 6], d[pos + 7])
+
+        if (chunk === 'IHDR') {
             w = (d[pos + 8] << 24) | (d[pos + 9] << 16) | (d[pos + 10] << 8) | d[pos + 11]
             h = (d[pos + 12] << 24) | (d[pos + 13] << 16) | (d[pos + 14] << 8) | d[pos + 15]
-            colorType = d[pos + 17]
-        } else if (type === 'IDAT') idat.push(d.slice(pos + 8, pos + 8 + len))
-        else if (type === 'IEND') break
+            type = d[pos + 17]
+        } else if (chunk === 'PLTE') {
+            plte = d.slice(pos + 8, pos + 8 + len)
+        } else if (chunk === 'tRNS') {
+            trns = d.slice(pos + 8, pos + 8 + len)
+        } else if (chunk === 'IDAT') {
+            idat.push(d.slice(pos + 8, pos + 8 + len))
+        } else if (chunk === 'IEND') break
+
         pos += 12 + len
     }
+
     if (!w || !idat.length) return null
     const total = idat.reduce((a, b) => a + b.length, 0)
     const merged = new Uint8Array(total)
     let off = 0
     for (const c of idat) { merged.set(c, off); off += c.length }
-    return { w, h, colorType, idat: merged }
+    return { w, h, type, idat: merged, plte, trns }
 }
 
-export const unfilterPNG = (raw: Uint8Array, w: number, h: number, colorType: number): PNGData => {
-    const bpp = colorType === 6 ? 4 : colorType === 2 ? 3 : colorType === 4 ? 2 : 1
+export const unfilterPNG = (raw: Uint8Array, w: number, h: number, type: number, plte?: Uint8Array, trns?: Uint8Array): PNGData => {
+    const bpp = type === 6 ? 4 : type === 2 ? 3 : type === 4 ? 2 : 1
     const scanline = w * bpp + 1
     const rgb = new Uint8Array(w * h * 3)
-    const alpha = (colorType === 6 || colorType === 4) ? new Uint8Array(w * h) : undefined
+
+    // FIX: Initialize Alpha if type implies it (6/4) OR if a 'trns' chunk exists (2/3)
+    // We fill it with 255 (Opaque) by default, then we will carve out the transparent pixels.
+    const alpha = (type === 6 || type === 4 || trns) ? new Uint8Array(w * h).fill(255) : undefined
 
     const paeth = (a: number, b: number, c: number) => {
         const p = a + b - c, pa = Math.abs(p - a), pb = Math.abs(p - b), pc = Math.abs(p - c)
         return pa <= pb && pa <= pc ? a : pb <= pc ? b : c
     }
 
+    // 1. Unfilter the raw data (Standard PNG logic)
     for (let y = 0; y < h; y++) {
         const filter = raw[y * scanline]
         for (let x = 0; x < w * bpp; x++) {
@@ -70,19 +98,54 @@ export const unfilterPNG = (raw: Uint8Array, w: number, h: number, colorType: nu
             else if (filter === 3) raw[i] = (raw[i] + Math.floor((a + b) / 2)) & 255
             else if (filter === 4) raw[i] = (raw[i] + paeth(a, b, c)) & 255
         }
+    }
 
+    // 2. Decode pixels to RGB and apply Transparency (tRNS)
+    for (let y = 0; y < h; y++) {
         for (let x = 0; x < w; x++) {
             const i = y * scanline + 1 + x * bpp
             const oi = (y * w + x) * 3
-            if (colorType === 6) { rgb[oi] = raw[i]; rgb[oi + 1] = raw[i + 1]; rgb[oi + 2] = raw[i + 2]; if (alpha) alpha[y * w + x] = raw[i + 3] }
-            else if (colorType === 4) { rgb[oi] = rgb[oi + 1] = rgb[oi + 2] = raw[i]; if (alpha) alpha[y * w + x] = raw[i + 1] }
-            else if (colorType === 2) { rgb[oi] = raw[i]; rgb[oi + 1] = raw[i + 1]; rgb[oi + 2] = raw[i + 2] }
-            else { rgb[oi] = rgb[oi + 1] = rgb[oi + 2] = raw[i] }
+            const ai = y * w + x
+
+            if (type === 6) {
+                // Truecolor + Alpha (RGBA)
+                rgb[oi] = raw[i]; rgb[oi + 1] = raw[i + 1]; rgb[oi + 2] = raw[i + 2]
+                if (alpha) alpha[ai] = raw[i + 3]
+            }
+            else if (type === 2) {
+                // Truecolor (RGB)
+                const r = raw[i], g = raw[i + 1], b = raw[i + 2]
+                rgb[oi] = r; rgb[oi + 1] = g; rgb[oi + 2] = b
+                // FIX: Check tRNS for specific transparent color (Key Color)
+                if (alpha && trns && trns.length >= 6) {
+                    const kr = trns[1], kg = trns[3], kb = trns[5] // Read High bytes of 16-bit key
+                    if (r === kr && g === kg && b === kb) alpha[ai] = 0 // Set to Transparent
+                }
+            }
+            else if (type === 3 && plte) {
+                // Indexed Color (Palette)
+                const idx = raw[i]
+                const pIdx = idx * 3
+                rgb[oi] = plte[pIdx]; rgb[oi + 1] = plte[pIdx + 1]; rgb[oi + 2] = plte[pIdx + 2]
+                // FIX: Map palette index to tRNS alpha value
+                if (alpha && trns && idx < trns.length) alpha[ai] = trns[idx]
+            }
+            else if (type === 4) {
+                // Grayscale + Alpha
+                rgb[oi] = rgb[oi + 1] = rgb[oi + 2] = raw[i]
+                if (alpha) alpha[ai] = raw[i + 1]
+            }
+            else {
+                // Grayscale
+                const v = raw[i]
+                rgb[oi] = rgb[oi + 1] = rgb[oi + 2] = v
+                // FIX: Check tRNS for grayscale transparency
+                if (alpha && trns && trns.length >= 2 && v === trns[1]) alpha[ai] = 0
+            }
         }
     }
     return { w, h, rgb, alpha }
 }
-
 
 export const parseTTF = (d: Uint8Array): TTFInfo | null => {
     const u16 = (o: number) => (d[o] << 8) | d[o + 1]

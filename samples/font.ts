@@ -7,18 +7,29 @@ const totalSales = sales.reduce((a, b) => a + b, 0)
 
 const fontData = await Bun.file('samples/Montserrat-Regular.ttf').bytes()
 
+// https://commons.wikimedia.org/wiki/File:PNG_transparency_demonstration_1.png
+// const imagePngData = await Bun.file('samples/image-transparent.png').bytes()
+const imagePngReq = await fetch('https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png')
+const imageJpegReq = await fetch('https://randomuser.me/api/portraits/women/3.jpg')
+const imagePngData = await imagePngReq.arrayBuffer()
+const imageJpegData = await imageJpegReq.arrayBuffer()
+
+
 const doc = pdfPlus('A4')
   .registerFont('montserrat', fontData)
   .page()
 
   // Header
   .rect(0, 0, 595, 70, { fill: '#2c3e50' })
-  .text('SALES REPORT', 50, 30, { size: 24, color: '#fff', weight: 'bold', font: 'montserrat' })
+  .image(new Uint8Array(imagePngData), 50, 10, { width: 66, height: 50 })
+  .text('SALES REPORT', 120, 30, { size: 24, color: '#fff', weight: 'bold', font: 'montserrat' })
   // .text('SALES REPORT', 50, 30, { size: 24, color: '#fff', weight: 'bold' })
-  .text('Q1-Q2 2024', 50, 50, { size: 12, color: '#bdc3c7', font: 'montserrat' })
-  .text('Tech Solutions Inc.', 545, 40, { size: 11, color: '#95a5a6', align: 'right', font: 'montserrat' })
+  .text('Q1-Q2 2024', 120, 50, { size: 12, color: '#bdc3c7', font: 'montserrat' })
+  .text('Tech Solutions Inc.', 545, 26, { size: 11, color: '#95a5a6', align: 'right', font: 'montserrat' })
+  .image(new Uint8Array(imageJpegData), 517, 34, { width: 28, height: 28 })
 
-  // Summary Cards
+// Summary Cards
+doc
   .rect(50, 90, 150, 60, { fill: '#3498db', radius: 8 })
   .text('Total Revenue', 125, 108, { size: 9, color: '#fff', align: 'center', font: 'montserrat' })
   .text('$' + totalSales.toLocaleString(), 125, 130, { size: 20, color: '#fff', weight: 'bold', align: 'center', font: 'montserrat' })

@@ -1,6 +1,7 @@
 export type Color = string | [number, number, number];
 export type Align = "left" | "center" | "right";
 export type Weight = "normal" | "bold" | "italic" | "bolditalic";
+export type ImageType = "jpeg" | "png" | null;
 export type Type =
     | "text"
     | "rect"
@@ -97,6 +98,15 @@ export interface PNGData {
     h: number;
     rgb: Uint8Array;
     alpha?: Uint8Array;
+}
+
+export interface PNGHeader {
+    w: number;
+    h: number;
+    type: number;
+    idat: Uint8Array;
+    plte?: Uint8Array;
+    trns?: Uint8Array
 }
 
 export interface TTFInfo {
