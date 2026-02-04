@@ -63,7 +63,7 @@ doc
   .text('Detailed Breakdown', 50, 390, { size: 14, weight: 'bold', font: 'montserrat' })
   .table(
     [
-      ['January', '45', '$12,500', '+0%'],
+      ['January with long description', '45', '$12,500', '+0%'],
       ['February', '58', '$15,800', '+26.4%'],
       ['March', '52', '$14,200', '-10.1%'],
       ['April', '71', '$18,900', '+33.1%'],
@@ -87,14 +87,14 @@ doc
   )
 
   // Key Insights
-  .rect(50, 610, 495, 70, { fill: '#fef9e7', radius: 5 })
-  .text('Key Insights', 65, 628, { size: 11, weight: 'bold', color: '#d4ac0d', font: 'montserrat' })
-  .text('Best month: June ($25,600) | Avg growth: 16.4%/month | Orders: 45 to 98 (+117.8%)', 65, 648, { size: 10, font: 'montserrat' })
-  .text('Recommendation: Focus on Q3 marketing to maintain momentum', 65, 665, { size: 10, color: '#666', font: 'montserrat' })
+  .rect(50, 630, 495, 70, { fill: '#fef9e7', radius: 5 })
+  .text('Key Insights', 65, 648, { size: 11, weight: 'bold', color: '#d4ac0d', font: 'montserrat' })
+  .text('Best month: June ($25,600) | Avg growth: 16.4%/month | Orders: 45 to 98 (+117.8%)', 65, 668, { size: 10, font: 'montserrat' })
+  .text('Recommendation: Focus on Q3 marketing to maintain momentum', 65, 685, { size: 10, color: '#666', font: 'montserrat' })
 
   // Footer
-  .line(50, 710, 545, 710, { color: '#eee' })
-  .text('Generated with podpdf', 297, 730, { size: 9, color: '#aaa', align: 'center', font: 'montserrat' })
+  .line(50, 730, 545, 730, { color: '#eee' })
+  .text('Generated with podpdf', 297, 750, { size: 9, color: '#aaa', align: 'center', font: 'montserrat' })
 
 await doc.save('samples/font-demo.pdf')
 console.log('Created: samples/font-demo.pdf')
