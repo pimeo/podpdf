@@ -11,7 +11,17 @@ export const fill = (c: Color) => { const [r, g, b] = rgb(c); return `${r.toFixe
 export const stroke = (c: Color) => { const [r, g, b] = rgb(c); return `${r.toFixed(3)} ${g.toFixed(3)} ${b.toFixed(3)} RG` }
 export const esc = (t: string) => t.replace(/\\/g, '\\\\').replace(/\(/g, '\\(').replace(/\)/g, '\\)').replace(/[^\x00-\x7F]/g, c => `\\${(CP1252[c] || c.charCodeAt(0)).toString(8).padStart(3, '0')}`)
 export const n = (v: number) => Number.isInteger(v) ? v.toString() : v.toFixed(2)
-export const measure = (t: string, s: number) => t.length * s * 0.52
+export const measure = (t: string, s: number, fontName: string | null = null, fonts: Map<string, TTFInfo> = new Map()): number => {
+    if (!fontName || !fonts.has(fontName)) return t.length * s * 0.52 // Fallback for standard fonts
+    const info = fonts.get(fontName)!
+    const scale = s / info.unitsPerEm
+    let w = 0
+    for (let i = 0; i < t.length; i++) {
+        const code = CP1252[t[i]] || t.charCodeAt(i)
+        w += (info.widths[code] || 0) * scale
+    }
+    return w
+}
 
 export const parsePNGHeader = (d: Uint8Array): { w: number; h: number; colorType: number; idat: Uint8Array } | null => {
     if (d[0] !== 0x89 || d[1] !== 0x50 || d[2] !== 0x4E || d[3] !== 0x47) return null
@@ -73,6 +83,7 @@ export const unfilterPNG = (raw: Uint8Array, w: number, h: number, colorType: nu
     return { w, h, rgb, alpha }
 }
 
+
 export const parseTTF = (d: Uint8Array): TTFInfo | null => {
     const u16 = (o: number) => (d[o] << 8) | d[o + 1]
     const i16 = (o: number) => { const v = u16(o); return v > 32767 ? v - 65536 : v }
@@ -83,15 +94,55 @@ export const parseTTF = (d: Uint8Array): TTFInfo | null => {
         const o = 12 + i * 16
         tables[String.fromCharCode(d[o], d[o + 1], d[o + 2], d[o + 3])] = { offset: u32(o + 8), length: u32(o + 12) }
     }
-    if (!tables.head || !tables.hhea || !tables.hmtx || !tables.maxp) return null
-    const head = tables.head.offset
-    const unitsPerEm = u16(head + 18)
+    if (!tables.head || !tables.hhea || !tables.hmtx || !tables.maxp || !tables.cmap) return null
+
+    // Parse Metrics & BBox
+    const head = tables.head.offset, unitsPerEm = u16(head + 18)
     const bbox = [i16(head + 36), i16(head + 38), i16(head + 40), i16(head + 42)]
-    const hhea = tables.hhea.offset
-    const ascent = i16(hhea + 4), descent = i16(hhea + 6), numHmtx = u16(hhea + 34)
-    const hmtx = tables.hmtx.offset
-    const widths: number[] = []
-    for (let i = 0; i < Math.min(numHmtx, 256); i++) widths.push(u16(hmtx + i * 4))
+    const hhea = tables.hhea.offset, ascent = i16(hhea + 4), descent = i16(hhea + 6), numHmtx = u16(hhea + 34)
+    const hmtxOffset = tables.hmtx.offset
+
+    // NEW: Parse CMAP to map ASCII -> Glyph ID
+    const cmap = tables.cmap.offset, numSubtables = u16(cmap + 2)
+    let cmapOffset = 0
+    for (let i = 0; i < numSubtables; i++) {
+        const pid = u16(cmap + 4 + i * 8), eid = u16(cmap + 6 + i * 8), off = u32(cmap + 8 + i * 8)
+        if ((pid === 3 && eid === 1) || (pid === 0 && eid === 3)) { cmapOffset = cmap + off; break }
+    }
+    if (!cmapOffset) return null // Only supporting Microsoft/Unicode BMP
+
+    // Reading CMAP Format 4
+    const segCount = u16(cmapOffset + 6) / 2
+    const endCounts: number[] = [], startCounts: number[] = [], idDeltas: number[] = [], idRangeOffsets: number[] = []
+    let p = cmapOffset + 14
+    for (let i = 0; i < segCount; i++) { endCounts.push(u16(p)); p += 2 }
+    p += 2 // reservedPad
+    for (let i = 0; i < segCount; i++) { startCounts.push(u16(p)); p += 2 }
+    for (let i = 0; i < segCount; i++) { idDeltas.push(i16(p)); p += 2 }
+    const rangeOffsetPos = p
+    for (let i = 0; i < segCount; i++) { idRangeOffsets.push(u16(p)); p += 2 }
+
+    const getGid = (code: number) => {
+        for (let i = 0; i < segCount; i++) {
+            if (code <= endCounts[i]) {
+                if (code < startCounts[i]) return 0
+                if (idRangeOffsets[i] === 0) return (code + idDeltas[i]) & 0xFFFF
+                const id = u16(rangeOffsetPos + i * 2 + idRangeOffsets[i] + (code - startCounts[i]) * 2)
+                return id ? (id + idDeltas[i]) & 0xFFFF : 0
+            }
+        }
+        return 0
+    }
+
+    // NEW: Build Widths array ordered by ASCII (0-255)
+    const pdfWidths: number[] = []
+    for (let i = 0; i < 256; i++) {
+        const gid = getGid(i)
+        if (gid >= numHmtx) pdfWidths.push(0)
+        else pdfWidths.push(u16(hmtxOffset + gid * 4))
+    }
+
+    // Name Extraction
     let name = 'CustomFont'
     if (tables.name) {
         const nt = tables.name.offset, nc = u16(nt + 2), so = nt + u16(nt + 4)
@@ -100,5 +151,5 @@ export const parseTTF = (d: Uint8Array): TTFInfo | null => {
             if (u16(r + 6) === 6) { name = Array.from(d.slice(so + u16(r + 10), so + u16(r + 10) + u16(r + 8))).filter(b => b > 31 && b < 127).map(b => String.fromCharCode(b)).join(''); break }
         }
     }
-    return { name: name.replace(/[^a-zA-Z0-9]/g, ''), unitsPerEm, ascent, descent, bbox, widths, data: d }
+    return { name: name.replace(/[^a-zA-Z0-9]/g, ''), unitsPerEm, ascent, descent, bbox, widths: pdfWidths, data: d }
 }
