@@ -187,7 +187,8 @@ class Page {
           color: o.headerColor ?? '#000',
           align: c.align,
           maxWidth: cw[i] - p * 2,
-          notInBounding: true
+          notInBounding: true,
+          font: o.font
         })
       cx += cw[i]
     }
@@ -215,7 +216,8 @@ class Page {
             size: fs,
             align: c.align,
             maxWidth: cw[i] - p * 2,
-            notInBounding: true
+            notInBounding: true,
+            font: o.font
           })
         cx += cw[i]
       }

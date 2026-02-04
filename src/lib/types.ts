@@ -83,6 +83,7 @@ export interface TableOpts {
     notInBounding?: boolean;
     striped?: boolean;
     stripedColor?: Color;
+    font?: string;
 }
 
 export interface PDFMetadata {
