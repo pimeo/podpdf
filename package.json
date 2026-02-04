@@ -1,6 +1,6 @@
 {
   "name": "@pimeo/podpdf",
-  "version": "1.2.13",
+  "version": "1.2.14",
   "description": "Ultra-fast, zero-dependency PDF generation for Node.js, Bun & Browser.",
   "type": "module",
   "main": "dist/index.js",
