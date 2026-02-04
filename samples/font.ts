@@ -25,7 +25,7 @@ const doc = pdfPlus('A4')
   .text('SALES REPORT', 120, 30, { size: 24, color: '#fff', weight: 'bold', font: 'montserrat' })
   // .text('SALES REPORT', 50, 30, { size: 24, color: '#fff', weight: 'bold' })
   .text('Q1-Q2 2024', 120, 50, { size: 12, color: '#bdc3c7', font: 'montserrat' })
-  .text('Tech Solutions Inc.', 545, 26, { size: 11, color: '#95a5a6', align: 'right', font: 'montserrat' })
+  .text('Téch Sôlutions Inc.', 545, 26, { size: 11, color: '#95a5a6', align: 'right', font: 'montserrat' })
   .image(new Uint8Array(imageJpegData), 517, 34, { width: 28, height: 28 })
 
 // Summary Cards

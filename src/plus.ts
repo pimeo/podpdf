@@ -17,7 +17,6 @@ import {
   BoundingElement,
 } from './lib/types'
 import {
-  rgb,
   fill,
   stroke,
   esc,
@@ -36,11 +35,6 @@ const FONTS: Record<string, Record<Weight, string>> = {
   helvetica: { normal: 'Helvetica', bold: 'Helvetica-Bold', italic: 'Helvetica-Oblique', bolditalic: 'Helvetica-BoldOblique' },
   times: { normal: 'Times-Roman', bold: 'Times-Bold', italic: 'Times-Italic', bolditalic: 'Times-BoldItalic' },
   courier: { normal: 'Courier', bold: 'Courier-Bold', italic: 'Courier-Oblique', bolditalic: 'Courier-BoldOblique' },
-}
-
-const CP1252: Record<string, number> = {
-  '€': 128, '‚': 130, 'ƒ': 131, '„': 132, '…': 133, '†': 134, '‡': 135, 'ˆ': 136, '‰': 137, 'Š': 138, '‹': 139, 'Œ': 140, 'Ž': 142,
-  '‘': 145, '’': 146, '“': 147, '”': 148, '•': 149, '–': 150, '—': 151, '˜': 152, '™': 153, 'š': 154, '›': 155, 'œ': 156, 'ž': 158, 'Ÿ': 159
 }
 
 // ============== Page ==============
