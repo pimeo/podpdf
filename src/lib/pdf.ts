@@ -46,6 +46,8 @@ export class PDF {
     link(t: string, url: string, x: number, y: number, o?: LinkOpts) { this.ensure().link(t, url, x, y, o); return this }
     table(data: string[][], x: number, y: number, o: TableOpts) { this.ensure().table(data, x, y, o); return this }
     getBoundingElements() { return this.ensure().getBoundingElements(); }
+    measureTableHeaderRow(tableData: string[][], o: TableOpts): Size { return this.ensure().measureTableHeaderRow(tableData, o); }
+    measureTableBodyRow(data: string[], o: TableOpts): Size { return this.ensure().measureTableBodyRow(data, o); }
 
     private ensure() {
         if (!this.cur) {

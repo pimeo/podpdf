@@ -1,4 +1,5 @@
 import { pdf } from '../src'
+import { TableOpts } from '../src/lib/types'
 
 const doc = pdf('A4')
   .page()
@@ -149,6 +150,45 @@ const doc = pdf('A4')
       padding: 6,
       stripedColor: '#efc785',
     }
+  )
+
+
+const tableData = [
+  ['Web Development (including a long description)', '40 hrs', '$100/hr', '$4,000'],
+  ['UI/UX Design (including a second long description)', '20 hrs', '$80/hr', '$1,600'],
+  ['Consulting (including a very very long description)', '10 hrs', '$150/hr', '$1,500'],
+  ['Maintenance', '5 hrs', '$60/hr', '$300'],
+];
+
+const tableOptions: TableOpts = {
+  columns: [
+    { header: 'Description', width: 160, },
+    { header: 'Hours', width: 70, align: 'center' },
+    { header: 'Rate', width: 70, align: 'right' },
+    { header: 'Amount', width: 90, align: 'right' },
+  ],
+  headerBg: '#27ae60',
+  headerColor: '#fff',
+  borderColor: '#1e8449',
+  fontSize: 10,
+  padding: 8,
+  id: 'table-3'
+}
+
+doc
+  .page();
+
+console.log('measure row header', doc.measureTableHeaderRow(tableData, tableOptions))
+tableData.forEach(data => {
+  console.log('measure', doc.measureTableBodyRow(data, tableOptions))
+});
+
+doc
+  // 6. Status Table (6 rows x 22 = 132)
+  .table(
+    tableData,
+    50, 250,
+    tableOptions,
   )
 
 await doc.save('samples/tables-demo.pdf')

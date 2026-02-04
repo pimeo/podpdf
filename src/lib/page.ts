@@ -276,6 +276,33 @@ export class Page {
         return this.boundingElements
     }
 
+    measureTableHeaderRow(data: string[][], o: TableOpts): Size {
+        const p = o.padding ?? 8;
+        const fs = o.fontSize ?? 10
+
+        const cw = o.columns.map((c, i) => c.width ?? Math.max(measure(c.header, fs), ...data.map(r => measure(r[i] ?? '', fs))) + p * 2)
+        const tw = cw.reduce((a, b) => a + b, 0);
+
+        const headLines = o.columns.map((c, i) => this.wrap(c.header, cw[i] - p * 2, fs).length)
+        const hh = (Math.max(1, ...headLines) * fs * 1.2) + p * 2
+
+        return { width: tw, height: hh }
+    }
+
+    measureTableBodyRow(data: string[], o: TableOpts): Size {
+        const p = o.padding ?? 8;
+        const fs = o.fontSize ?? 10
+
+        const cw = o.columns.map((c, i) => c.width ?? Math.max(measure(c.header, fs), ...data.map(r => measure(r[i] ?? '', fs))) + p * 2)
+        const tw = cw.reduce((a, b) => a + b, 0);
+
+        // Calculate the height needed for this specific row
+        const rowLines = data.map((t, i) => this.wrap(t ?? '', cw[i] - p * 2, fs).length)
+        const rh = (Math.max(1, ...rowLines) * fs * 1.2) + p * 2
+
+        return { width: tw, height: rh }
+    }
+
     private addBoundingElement(b: BoundingElement) {
         this.boundingElements.push(b)
     }
