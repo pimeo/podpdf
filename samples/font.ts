@@ -5,7 +5,8 @@ const sales = [12500, 15800, 14200, 18900, 22100, 25600]
 const maxSale = Math.max(...sales)
 const totalSales = sales.reduce((a, b) => a + b, 0)
 
-const fontData = await Bun.file('samples/Montserrat-Regular.ttf').bytes()
+const fontRegularData = await Bun.file('samples/Montserrat-Regular.ttf').bytes()
+const fontBoldData = await Bun.file('samples/Montserrat-Bold.ttf').bytes()
 
 // https://commons.wikimedia.org/wiki/File:PNG_transparency_demonstration_1.png
 // const imagePngData = await Bun.file('samples/image-transparent.png').bytes()
@@ -16,13 +17,14 @@ const imageJpegData = await imageJpegReq.arrayBuffer()
 
 
 const doc = pdfPlus('A4')
-  .registerFont('montserrat', fontData)
+  .registerFont('montserrat', fontRegularData)
+  .registerFont('montserrat_bold', fontBoldData)
   .page()
 
   // Header
   .rect(0, 0, 595, 70, { fill: '#2c3e50' })
   .image(new Uint8Array(imagePngData), 50, 10, { width: 66, height: 50 })
-  .text('SALES REPORT', 120, 30, { size: 24, color: '#fff', weight: 'bold', font: 'montserrat' })
+  .text('SALES REPORT', 120, 30, { size: 24, color: '#fff', font: 'montserrat_bold' })
   // .text('SALES REPORT', 50, 30, { size: 24, color: '#fff', weight: 'bold' })
   .text('Q1-Q2 2024', 120, 50, { size: 12, color: '#bdc3c7', font: 'montserrat' })
   .text('Téch Sôlutions Inc.', 545, 26, { size: 11, color: '#95a5a6', align: 'right', font: 'montserrat' })
@@ -82,7 +84,8 @@ doc
       headerColor: '#fff',
       borderColor: '#ddd',
       fontSize: 10,
-      padding: 8
+      padding: 8,
+      font: 'montserrat'
     }
   )
 

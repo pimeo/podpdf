@@ -1,7 +1,12 @@
-import { pdf } from '../src'
-import { TableOpts } from '../src/lib/types'
+import { pdfPlus } from '../src/plus'
+import { TableOpts, Size } from '../src/lib/types'
 
-const doc = pdf('A4')
+const fontRegularData = await Bun.file('samples/Montserrat-Regular.ttf').bytes()
+const fontBoldData = await Bun.file('samples/Montserrat-Bold.ttf').bytes()
+
+const doc = pdfPlus('A4')
+  .registerFont('montserrat', fontRegularData)
+  .registerFont('montserrat_bold', fontBoldData)
   .page()
 
   // Header
@@ -158,6 +163,22 @@ const tableData = [
   ['UI/UX Design (including a second long description)', '20 hrs', '$80/hr', '$1,600'],
   ['Consulting (including a very very long description)', '10 hrs', '$150/hr', '$1,500'],
   ['Maintenance', '5 hrs', '$60/hr', '$300'],
+  ['Web Development (including a long description)', '40 hrs', '$100/hr', '$4,000'],
+  ['UI/UX Design (including a second long description)', '20 hrs', '$80/hr', '$1,600'],
+  ['Consulting (including a very very long description)', '10 hrs', '$150/hr', '$1,500'],
+  ['Maintenance', '5 hrs', '$60/hr', '$300'],
+  ['Web Development (including a long description)', '40 hrs', '$100/hr', '$4,000'],
+  ['UI/UX Design (including a second long description)', '20 hrs', '$80/hr', '$1,600'],
+  ['Consulting (including a very very long description)', '10 hrs', '$150/hr', '$1,500'],
+  ['Maintenance', '5 hrs', '$60/hr', '$300'],
+  ['Web Development (including a long description)', '40 hrs', '$100/hr', '$4,000'],
+  ['UI/UX Design (including a second long description)', '20 hrs', '$80/hr', '$1,600'],
+  ['Consulting (including a very very long description)', '10 hrs', '$150/hr', '$1,500'],
+  ['Maintenance', '5 hrs', '$60/hr', '$300'],
+  ['Web Development (including a long description)', '40 hrs', '$100/hr', '$4,000'],
+  ['UI/UX Design (including a second long description)', '20 hrs', '$80/hr', '$1,600'],
+  ['Consulting (including a very very long description)', '10 hrs', '$150/hr', '$1,500'],
+  ['Maintenance', '5 hrs', '$60/hr', '$300'],
 ];
 
 const tableOptions: TableOpts = {
@@ -172,24 +193,38 @@ const tableOptions: TableOpts = {
   borderColor: '#1e8449',
   fontSize: 10,
   padding: 8,
-  id: 'table-3'
+  id: 'table-3',
+  font: 'montserrat_bold'
 }
 
 doc
   .page();
 
-console.log('measure row header', doc.measureTableHeaderRow(tableData, tableOptions))
+const heightHeaderRow = doc.measureTableHeaderRow(tableData, tableOptions)
+console.log('measure row header', heightHeaderRow)
+
+let heightBodyRows: Size[] = []
 tableData.forEach(data => {
-  console.log('measure', doc.measureTableBodyRow(data, tableOptions))
+  heightBodyRows.push(doc.measureTableBodyRow(data, tableOptions))
 });
 
 doc
   // 6. Status Table (6 rows x 22 = 132)
   .table(
     tableData,
-    50, 250,
+    20, 20,
     tableOptions,
   )
+
+let offsetX = 20 - 3
+let offsetY = 20
+doc.rect(offsetX, offsetY, 10, heightHeaderRow.height, { fill: '#1a1a2e' })
+offsetY += heightHeaderRow.height
+tableData.forEach((_, idx) => {
+  const { height } = heightBodyRows[idx]
+  doc.rect(offsetX, offsetY, 10, height, { fill: `#88${idx + 1}` })
+  offsetY += height
+});
 
 await doc.save('samples/tables-demo.pdf')
 console.log('Created: samples/tables-demo.pdf')
