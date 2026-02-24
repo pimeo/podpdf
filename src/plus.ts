@@ -66,7 +66,7 @@ class Page {
     this.f.add(font)
     let py = this.h - y;
     let tx = x;
-    const lines = o.maxWidth ? this.wrap(t, o.maxWidth, s) : [t]
+    const lines = o.maxWidth ? this.wrap(t, o.maxWidth, s, font) : [t]
     let mw = 0
     let mh = 0
     for (const ln of lines) {
@@ -158,6 +158,7 @@ class Page {
   table(data: string[][], x: number, y: number, o: TableOpts) {
     const p = o.padding ?? 8;
     const fs = o.fontSize ?? 10
+    const font = o.font ?? 'Helvetica'
     const striped = o.striped !== false
     const stripedColor = o.stripedColor ?? '#F9F9F9'
 
@@ -169,7 +170,7 @@ class Page {
     // -- Render Header
 
     // Calculate header height based on wrapped lines
-    const headLines = o.columns.map((c, i) => this.wrap(c.header, cw[i] - p * 2, fs).length)
+    const headLines = o.columns.map((c, i) => this.wrap(c.header, cw[i] - p * 2, fs, font).length)
     const hh = (Math.max(1, ...headLines) * fs * 1.2) + p * 2
 
     this.rect(x, cy, tw, hh, { fill: o.headerBg ?? '#F0F0F0', radius: o.headerRadius ?? 0, notInBounding: true })
@@ -198,7 +199,7 @@ class Page {
 
     for (let r = 0; r < data.length; r++) {
       // Calculate the height needed for this specific row
-      const rowLines = data[r].map((t, i) => this.wrap(t ?? '', cw[i] - p * 2, fs).length)
+      const rowLines = data[r].map((t, i) => this.wrap(t ?? '', cw[i] - p * 2, fs, font).length)
       const rh = (Math.max(1, ...rowLines) * fs * 1.2) + p * 2
 
       // Draw Background
@@ -241,11 +242,12 @@ class Page {
   measureTableHeaderRow(data: string[][], o: TableOpts): Size {
     const p = o.padding ?? 8;
     const fs = o.fontSize ?? 10
+    const font = o.font ?? 'Helvetica'
 
     const cw = o.columns.map((c, i) => c.width ?? Math.max(measure(c.header, fs), ...data.map(r => measure(r[i] ?? '', fs))) + p * 2)
     const tw = cw.reduce((a, b) => a + b, 0);
 
-    const headLines = o.columns.map((c, i) => this.wrap(c.header, cw[i] - p * 2, fs).length)
+    const headLines = o.columns.map((c, i) => this.wrap(c.header, cw[i] - p * 2, fs, font).length)
     const hh = (Math.max(1, ...headLines) * fs * 1.2) + p * 2
 
     return { width: tw, height: hh }
@@ -254,12 +256,13 @@ class Page {
   measureTableBodyRow(data: string[], o: TableOpts): Size {
     const p = o.padding ?? 8;
     const fs = o.fontSize ?? 10
+    const font = o.font ?? 'Helvetica'
 
     const cw = o.columns.map((c, i) => c.width ?? Math.max(measure(c.header, fs), ...data.map(r => measure(r[i] ?? '', fs))) + p * 2)
     const tw = cw.reduce((a, b) => a + b, 0);
 
     // Calculate the height needed for this specific row
-    const rowLines = data.map((t, i) => this.wrap(t ?? '', cw[i] - p * 2, fs).length)
+    const rowLines = data.map((t, i) => this.wrap(t ?? '', cw[i] - p * 2, fs, font).length)
     const rh = (Math.max(1, ...rowLines) * fs * 1.2) + p * 2
 
     return { width: tw, height: rh }
