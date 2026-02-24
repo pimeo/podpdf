@@ -179,6 +179,7 @@ const tableData = [
   ['UI/UX Design (including a second long description)', '20 hrs', '$80/hr', '$1,600'],
   ['Consulting (including a very very long description)', '10 hrs', '$150/hr', '$1,500'],
   ['Maintenance', '5 hrs', '$60/hr', '$300'],
+  ['Web_Development_(including-a-long-description)_that-can-be-set-on__multiple_lines', '40 hrs', '$100/hr', '$4,000'],
 ];
 
 const tableOptions: TableOpts = {

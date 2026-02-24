@@ -308,9 +308,49 @@ export class Page {
     }
 
     private wrap(t: string, mw: number, s: number): string[] {
-        const words = t.split(' '), lines: string[] = []; let cur = ''
-        for (const w of words) { const test = cur ? `${cur} ${w}` : w; if (measure(test, s) <= mw) cur = test; else { if (cur) lines.push(cur); cur = w } }
-        if (cur) lines.push(cur); return lines
+        const words = t.split(' ');
+        const lines: string[] = [];
+        let cur = ''
+
+        for (const w of words) {
+            const test = cur ? `${cur} ${w}` : w;
+
+            // The word fits on the current line perfectly
+            if (measure(test, s) <= mw) {
+                cur = test;
+            } else {
+                // The word doesn't fit. Save the current line.
+                if (cur) {
+                    lines.push(cur);
+                    cur = '';
+                }
+
+                if (measure(w, s) <= mw) {
+                    // It fits on its own new line
+                    cur = w;
+                } else {
+                    // The word is too long! Break it down character by character
+                    let temp = '';
+                    for (const char of w) {
+                        const charTest = temp ? temp + char : char;
+                        if (measure(charTest, s) <= mw) {
+                            temp = charTest;
+                        } else {
+                            if (temp) lines.push(temp);
+                            temp = char;
+                        }
+                    }
+                    cur = temp; // Keep the remainder of the long word for the next loop
+                }
+
+            }
+        }
+
+        if (cur) {
+            lines.push(cur);
+        }
+
+        return lines
     }
 
     private imgInfo(d: Uint8Array): { w: number; h: number } | null {
