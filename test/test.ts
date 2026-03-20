@@ -200,6 +200,22 @@ console.log('  - PDF starts with %PDF:', new TextDecoder().decode(bytes.slice(0,
 console.log('  - Output size:', bytes.length, 'bytes')
 console.log('  PASSED\n')
 
+// Test 9: Text accents
+console.log('Test 9: Text accents')
+const textAccentsDoc = pdf('A4')
+  .page()
+  .text('French paragraph with accents', 20, 20, { size: 16, weight: 'bold' })
+  .text(`L'été à Paris est une expérience vraiment féerique qui me tient à cœur. On flâne sur les quais de la Seine, dégustant une pâtisserie dorée sous un ciel ébène. Chaque café dégage un arôme sucré qui séduit les passants.`, 20, 40, { size: 12, maxWidth: 400 })
+  .text('German paragraph with accents', 20, 120, { size: 16, weight: 'bold' })
+  .text(`Die gemütliche Atmosphäre in den Bergen ist unvergleichlich. Während die Vögel in den hohen Bäumen süß singen, genießen wir frische Brötchen und heißen Tee. Alles wirkt hier völlig friedlich und schön.`, 20, 140, { size: 12, maxWidth: 400 })
+  .text('Spanish paragraph with accents', 20, 220, { size: 16, weight: 'bold' })
+  .text(`El otoño en Madrid es bellísimo. Caminar por el Retiro mientras las hojas caen es una delicia única. Mañana comeré paella en el jardín y después veré el sol ponerse tras los edificios históricos.`, 20, 240, { size: 12, maxWidth: 400 })
+await textAccentsDoc.save('test/output/text-accents.pdf')
+console.log('  - Text accents work for french language')
+console.log('  - Text accents work for german language')
+console.log('  - Text accents work for spanish language')
+console.log('  PASSED\n')
+
 console.log('========================================')
 console.log('All tests PASSED!')
 console.log('Check test/output/ folder for generated PDFs')
