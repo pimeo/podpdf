@@ -16,6 +16,8 @@ Zero dependencies  •  TypeScript native
 - [x] Support table multi-lines row cell. When a row has a fixed width, the text in the cells of the associated columns is automatically wrapped to the next line.
 - [x] The project is structured into several files to facilitate maintenance, make it easier to integrate new features and avoid code repetition.
 - [x] Get the boundaries (width/height/offsetX/offsetY) of each set of elements in the document.
+- [x] Better custom fonts support and wrapped text.
+- [x] Rewrite png image support. Use a simple method to insert an image by auto-detecting its extension. Better transparency support for png image.
 
 
 ## Feature Comparison
